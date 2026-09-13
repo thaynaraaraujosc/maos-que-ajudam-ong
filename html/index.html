@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mãos que Ajudam</title>
+  <meta name="description" content="ONG Mãos que Ajudam: conectando voluntários, doadores e comunidades para transformar vidas.">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <header>
+    <div class="container header-content">
+      <h1>Mãos que Ajudam</h1>
+      <button
+        type="button"
+        class="menu-toggle"
+        id="menu-toggle"
+        aria-controls="menu-principal"
+        aria-expanded="false"
+        aria-label="Abrir menu de navegação">
+        <span aria-hidden="true">&#9776;</span>
+      </button>
+      <nav aria-label="Navegação principal">
+        <ul id="menu-principal">
+          <li><a href="#/inicio" data-rota="inicio">Início</a></li>
+          <li class="tem-submenu">
+            <a href="#/projetos" data-rota="projetos">Projetos Sociais</a>
+            <ul class="submenu">
+              <li><a href="#/projetos" data-rota="projetos">Alimento Solidário</a></li>
+              <li><a href="#/projetos" data-rota="projetos">Educação para Todos</a></li>
+              <li><a href="#/projetos" data-rota="projetos">Acolhimento e Saúde</a></li>
+            </ul>
+          </li>
+          <li><a href="#/cadastro" data-rota="cadastro">Cadastre-se</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- A SPA injeta o conteúdo de cada "página" aqui, via JavaScript -->
+  <main id="app"></main>
+
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <h2>Mãos que Ajudam</h2>
+        <p>CNPJ: 00.000.000/0001-00</p>
+      </div>
+      <nav aria-label="Navegação do rodapé">
+        <ul>
+          <li><a href="#/inicio">Início</a></li>
+          <li><a href="#/projetos">Projetos Sociais</a></li>
+          <li><a href="#/cadastro">Cadastre-se</a></li>
+        </ul>
+      </nav>
+      <address>
+        Rua da Solidariedade, 123 — Centro<br>
+        contato@maosqueajudam.org.br<br>
+        (00) 0000-0000
+      </address>
+    </div>
+    <p class="copyright">&copy; 2026 ONG Mãos que Ajudam. Todos os direitos reservados.</p>
+  </footer>
+
+  <dialog class="modal" id="modal-historia" aria-labelledby="modal-historia-titulo">
+    <button type="button" class="modal-fechar" id="fechar-modal-historia" aria-label="Fechar">&times;</button>
+    <h2 id="modal-historia-titulo">Nossa história</h2>
+    <p>
+      A Mãos que Ajudam nasceu em 2015, a partir de um pequeno grupo de amigos que
+      organizava arrecadações de alimentos aos finais de semana. Hoje, mais de 10 anos
+      depois, contamos com uma rede de 150 voluntários ativos e já impactamos mais de
+      3.200 pessoas através de projetos de alimentação, educação e saúde.
+    </p>
+    <button type="button" class="botao" id="fechar-modal-historia-rodape">Fechar</button>
+  </dialog>
+
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Módulos JavaScript, cada um responsável por uma área de funcionalidade -->
+  <!-- Day.js — biblioteca leve (~2KB) para cálculo de datas, usada para validar a idade mínima -->
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js"></script>
+
+  <script src="../js/modules/storage.js"></script>
+  <script src="../js/modules/templates.js"></script>
+  <script src="../js/modules/validacao.js"></script>
+  <script src="../js/modules/ui.js"></script>
+  <script src="../js/modules/nav.js"></script>
+  <script src="../js/modules/router.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

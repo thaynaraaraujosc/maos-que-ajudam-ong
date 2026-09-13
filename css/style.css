@@ -1,0 +1,712 @@
+/* ============================================
+   DESIGN SYSTEM — variáveis customizadas (CSS Custom Properties)
+   ============================================ */
+:root {
+  /* Cores — primárias */
+  --color-primary-700: #1f3f7a;
+  --color-primary-500: #2f5aa8;
+  --color-primary-300: #7c9bd1;
+
+  /* Cores — secundárias */
+  --color-secondary-600: #d68c0f;
+  --color-secondary-400: #f4a825;
+
+  /* Cores — neutras */
+  --color-neutral-900: #1e1e1e;
+  --color-neutral-700: #232323;
+  --color-neutral-500: #6b6b6b;
+  --color-neutral-300: #cccccc;
+  --color-neutral-100: #f7f8fa;
+  --color-white: #ffffff;
+
+  /* Cores de apoio (feedback de formulário) */
+  --color-danger: #d9534f;
+  --color-success: #3fa34d;
+
+  /* Tipografia — escala modular (5 patamares) */
+  --font-family-base: 'Segoe UI', Arial, sans-serif;
+  --font-size-xs: 0.875rem;  /* 14px — textos auxiliares/legendas */
+  --font-size-sm: 1rem;      /* 16px — corpo de texto */
+  --font-size-md: 1.25rem;   /* 20px — subtítulos (h3/h4) */
+  --font-size-lg: 1.75rem;   /* 28px — títulos de seção (h2) */
+  --font-size-xl: 2.5rem;    /* 40px — título de destaque (hero) */
+
+  /* Espaçamento — escala modular baseada em 8px */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+
+  /* Layout */
+  --radius: 8px;
+  --container-max-width: 1100px;
+  --grid-columns: 12;
+  --grid-gap: var(--space-4);
+}
+
+/* Breakpoints do projeto (documentação de referência — 5 pontos de quebra):
+   1. até 479px        — mobile pequeno (1 coluna, tipografia base)
+   2. 480px a 699px    — mobile grande  (ajuste de tipografia/espaçamento)
+   3. 700px a 959px    — tablet retrato (grid parcial: 2 colunas)
+   4. 960px a 1023px   — tablet paisagem / desktop pequeno (container mais largo)
+   5. a partir de 1024px — desktop (grid completo de 12 colunas)
+   (bônus) a partir de 1280px — desktop grande (container e tipografia ampliados) */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-700);
+  line-height: 1.6;
+  background-color: var(--color-neutral-100);
+}
+
+h1, h2, h3, h4 {
+  margin: 0 0 var(--space-3);
+  line-height: 1.25;
+}
+
+h2 { font-size: var(--font-size-lg); }
+h3, h4 { font-size: var(--font-size-md); }
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+/* Breakpoint 4: tablet paisagem / desktop pequeno — container mais largo */
+@media (min-width: 960px) {
+  :root {
+    --container-max-width: 1200px;
+  }
+}
+
+/* Breakpoint (bônus): desktop grande — container e tipografia ampliados */
+@media (min-width: 1280px) {
+  :root {
+    --container-max-width: 1280px;
+  }
+
+  .hero h2 {
+    font-size: 3rem;
+  }
+}
+
+/* ============================================
+   MACRO LAYOUT — CSS Grid (12 colunas)
+   ============================================ */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
+}
+
+/* Header (Flexbox — alinhamento de componente interno) */
+header {
+  background-color: var(--color-primary-500);
+  color: var(--color-white);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: var(--space-3) var(--space-4);
+}
+
+header h1 {
+  font-size: var(--font-size-md);
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: var(--color-white);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a[aria-current="page"] {
+  text-decoration: underline;
+}
+
+/* Botão hambúrguer — visível apenas em telas pequenas */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+}
+
+/* Dropdown (submenu) — Projetos Sociais no desktop */
+.tem-submenu {
+  position: relative;
+}
+
+.submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background-color: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 20;
+}
+
+.tem-submenu:hover > .submenu,
+.tem-submenu:focus-within > .submenu {
+  display: block;
+}
+
+.submenu li a {
+  display: block;
+  color: var(--color-neutral-700);
+  padding: var(--space-2) var(--space-3);
+  text-decoration: none;
+}
+
+.submenu li a:hover {
+  background-color: var(--color-neutral-100);
+}
+
+/* Breakpoint mobile (abaixo de 700px): esconde o menu e ativa o hambúrguer */
+@media (max-width: 699px) {
+  .header-content {
+    position: relative;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  #menu-principal {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    margin-top: var(--space-3);
+  }
+
+  #menu-principal.menu-aberto {
+    display: flex;
+  }
+
+  #menu-principal li {
+    width: 100%;
+  }
+
+  #menu-principal > li > a {
+    display: block;
+    padding: var(--space-2) 0;
+  }
+
+  /* No mobile, o submenu fica sempre visível, recolhido dentro do item pai */
+  #menu-principal .submenu {
+    position: static;
+    display: block;
+    box-shadow: none;
+    background-color: var(--color-primary-700);
+    border-radius: 0;
+    margin-top: var(--space-1);
+  }
+
+  #menu-principal .submenu li a {
+    color: var(--color-white);
+    padding-left: var(--space-4);
+  }
+
+  #menu-principal .submenu li a:hover {
+    background-color: var(--color-primary-500);
+  }
+}
+
+/* Hero */
+.hero {
+  background-color: var(--color-white);
+  padding: var(--space-6) 0;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-3);
+}
+
+/* Breakpoint 2: mobile grande — tipografia do hero cresce */
+@media (min-width: 480px) {
+  .hero h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  .lista-numeros {
+    gap: var(--space-6);
+  }
+}
+
+/* Botões (Flexbox interno via inline-block + alinhamento de texto) */
+.botao {
+  display: inline-block;
+  background-color: var(--color-secondary-400);
+  color: var(--color-neutral-700);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  margin-top: var(--space-3);
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+/* Estado hover — botão reage ao mouse */
+.botao:hover {
+  background-color: var(--color-secondary-600);
+}
+
+/* Estado focus — navegação por teclado (Tab) precisa de indicação visível */
+.botao:focus-visible {
+  outline: 3px solid var(--color-primary-300);
+  outline-offset: 2px;
+}
+
+/* Estado active — feedback imediato do clique */
+.botao:active {
+  transform: scale(0.97);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Estado disabled — indica que o botão não pode ser acionado */
+.botao:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.botao-secundario {
+  background-color: var(--color-primary-500);
+  color: var(--color-white);
+}
+
+.botao-secundario:hover {
+  background-color: var(--color-primary-700);
+}
+
+/* Seções gerais */
+section {
+  padding: var(--space-6) 0;
+}
+
+.sobre {
+  background-color: var(--color-neutral-100);
+}
+
+/* Grid macro: imagem + texto, dentro do modelo de 12 colunas */
+.sobre-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
+}
+
+.sobre-grid > img,
+.sobre-grid > .sobre-texto {
+  grid-column: 1 / -1;
+}
+
+.sobre-imagem {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.sobre-grid .cards {
+  grid-column: 1 / -1;
+}
+
+/* Breakpoint 3: tablet retrato — grid parcial de 2 colunas */
+@media (min-width: 700px) {
+  .sobre-grid > img {
+    grid-column: 1 / 6;   /* 5 de 12 colunas */
+  }
+
+  .sobre-grid > .sobre-texto {
+    grid-column: 6 / -1;  /* 7 de 12 colunas */
+    align-self: center;
+  }
+}
+
+/* Cartões — macro grid de 12 colunas; alinhamento interno de cada card em Flexbox */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
+  margin-top: var(--space-4);
+}
+
+.card {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+@media (min-width: 700px) {
+  .card { grid-column: span 6; }   /* tablet: 2 por linha */
+}
+
+/* Breakpoint 5: desktop — grid completo de 12 colunas ativado */
+@media (min-width: 1024px) {
+  .card { grid-column: span 4; }   /* desktop: 3 por linha */
+}
+
+/* Números (Flexbox — alinhamento de componente interno) */
+.numeros {
+  background-color: var(--color-primary-500);
+  color: var(--color-white);
+  text-align: center;
+}
+
+.lista-numeros {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: var(--space-7);
+  padding: 0;
+  margin-top: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.lista-numeros li {
+  display: flex;
+  flex-direction: column;
+}
+
+.lista-numeros strong {
+  font-size: var(--font-size-lg);
+}
+
+/* CTA */
+.cta {
+  background-color: var(--color-neutral-100);
+  text-align: center;
+}
+
+/* Página de projetos */
+.pagina-intro {
+  background-color: var(--color-white);
+  text-align: center;
+  padding-bottom: var(--space-4);
+}
+
+/* Lista de projetos — macro grid de 12 colunas */
+.lista-projetos .container {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
+}
+
+.projeto {
+  grid-column: 1 / -1;
+  background-color: var(--color-white);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+@media (min-width: 1024px) {
+  .projeto { grid-column: span 4; } /* 3 projetos por linha no desktop */
+}
+
+.projeto ul {
+  list-style: disc;
+  padding-left: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.projeto h4 {
+  margin-bottom: var(--space-1);
+  color: var(--color-primary-500);
+}
+
+/* Formulário */
+.container-form {
+  max-width: 640px;
+}
+
+fieldset {
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+  background-color: var(--color-white);
+}
+
+legend {
+  font-weight: bold;
+  color: var(--color-primary-500);
+  padding: 0 var(--space-2);
+}
+
+/* Campo do formulário — Flexbox para alinhamento interno label/input */
+.campo {
+  margin-bottom: var(--space-3);
+  display: flex;
+  flex-direction: column;
+}
+
+.campo label {
+  margin-bottom: var(--space-1);
+  font-weight: 500;
+  font-size: var(--font-size-xs);
+}
+
+.campo input {
+  padding: var(--space-2);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius);
+  font-size: var(--font-size-sm);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Estado focus — realce ao entrar no campo */
+.campo input:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px rgba(47, 90, 168, 0.2);
+}
+
+/* Feedback de erro — aplicado via JS quando o campo é inválido */
+.campo input.campo-invalido {
+  border-color: var(--color-danger);
+}
+
+.campo input.campo-invalido:focus {
+  box-shadow: 0 0 0 3px rgba(217, 83, 79, 0.2);
+}
+
+/* Feedback de sucesso — aplicado via JS quando o campo é válido e preenchido */
+.campo input.campo-valido {
+  border-color: var(--color-success);
+}
+
+.campo input.campo-valido:focus {
+  box-shadow: 0 0 0 3px rgba(63, 163, 77, 0.2);
+}
+
+.campo-radio,
+.campo-checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.campo-radio label,
+.campo-checkbox label {
+  margin-bottom: 0;
+}
+
+#mensagem-envio {
+  margin-top: var(--space-3);
+  font-weight: 500;
+}
+
+.mensagem-erro {
+  color: var(--color-danger);
+}
+
+/* Footer — macro grid de 12 colunas; navegação interna em Flexbox */
+footer {
+  background-color: var(--color-neutral-900);
+  color: var(--color-neutral-300);
+  padding: var(--space-6) 0 var(--space-4);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
+}
+
+.footer-content > * {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 700px) {
+  .footer-content > *:nth-child(1) { grid-column: 1 / 5; }
+  .footer-content > *:nth-child(2) { grid-column: 5 / 9; }
+  .footer-content > *:nth-child(3) { grid-column: 9 / -1; }
+}
+
+.footer-content h2 {
+  color: var(--color-white);
+  font-size: var(--font-size-md);
+}
+
+footer nav ul {
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+footer a {
+  color: var(--color-neutral-300);
+}
+
+address {
+  font-style: normal;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: var(--space-5);
+  font-size: var(--font-size-xs);
+  color: var(--color-neutral-500);
+}
+
+/* ============================================
+   COMPONENTES DE FEEDBACK — badges, alertas, toast e modal
+   ============================================ */
+
+/* Badges — categorização semântica da informação */
+.badge {
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  border-radius: 999px;
+  font-size: var(--font-size-xs);
+  font-weight: bold;
+  margin-bottom: var(--space-2);
+}
+
+.badge-primary {
+  background-color: rgba(47, 90, 168, 0.12);
+  color: var(--color-primary-700);
+}
+
+.badge-secondary {
+  background-color: rgba(244, 168, 37, 0.2);
+  color: var(--color-secondary-600);
+}
+
+.badge-success {
+  background-color: rgba(63, 163, 77, 0.15);
+  color: var(--color-success);
+}
+
+/* Alertas — avisos contextuais não bloqueantes */
+.alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  border-left: 4px solid;
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-xs);
+  text-align: left;
+}
+
+.alerta p {
+  margin: 0;
+}
+
+.alerta-info {
+  background-color: rgba(47, 90, 168, 0.08);
+  border-color: var(--color-primary-500);
+  color: var(--color-primary-700);
+}
+
+.alerta-erro {
+  background-color: rgba(217, 83, 79, 0.08);
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+/* Toast — notificação não obstrutiva, some sozinha */
+.toast-container {
+  position: fixed;
+  bottom: var(--space-4);
+  right: var(--space-4);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.toast {
+  background-color: var(--color-neutral-900);
+  color: var(--color-white);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-left: 4px solid var(--color-neutral-500);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast-visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-sucesso {
+  border-left-color: var(--color-success);
+}
+
+/* Modal — <dialog> nativo */
+dialog.modal {
+  border: none;
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  max-width: 480px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+dialog.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-fechar {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  background: none;
+  border: none;
+  font-size: var(--font-size-lg);
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-neutral-500);
+}
+
+.modal-fechar:hover {
+  color: var(--color-neutral-900);
+}
