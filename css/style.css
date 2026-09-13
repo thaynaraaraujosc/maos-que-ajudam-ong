@@ -8,6 +8,7 @@
   --color-primary-300: #7c9bd1;
 
   /* Cores — secundárias */
+  --color-secondary-800: #8a5a00; /* uso em texto sobre fundo claro (contraste AA) */
   --color-secondary-600: #d68c0f;
   --color-secondary-400: #f4a825;
 
@@ -22,6 +23,7 @@
   /* Cores de apoio (feedback de formulário) */
   --color-danger: #d9534f;
   --color-success: #3fa34d;
+  --color-success-dark: #1f6b32; /* uso em texto sobre fundo claro (contraste AA) */
 
   /* Tipografia — escala modular (5 patamares) */
   --font-family-base: 'Segoe UI', Arial, sans-serif;
@@ -628,12 +630,12 @@ address {
 
 .badge-secondary {
   background-color: rgba(244, 168, 37, 0.2);
-  color: var(--color-secondary-600);
+  color: var(--color-secondary-800);
 }
 
 .badge-success {
   background-color: rgba(63, 163, 77, 0.15);
-  color: var(--color-success);
+  color: var(--color-success-dark);
 }
 
 /* Alertas — avisos contextuais não bloqueantes */
