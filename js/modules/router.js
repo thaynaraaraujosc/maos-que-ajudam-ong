@@ -31,9 +31,17 @@ function inicializarPagina(rotaAtual) {
   }
 }
 
+// Elementos do shell (persistentes entre rotas) que precisam ser "resetados"
+// antes de trocar de página, para não vazar estado de uma rota para a outra
+function fecharModaisAbertos() {
+  document.querySelectorAll('dialog[open]').forEach((dialog) => dialog.close());
+}
+
 function roteador() {
   const rotaAtual = obterRotaAtual();
   const app = document.getElementById('app');
+
+  fecharModaisAbertos();
 
   app.innerHTML = ROTAS[rotaAtual].render();
   document.title = ROTAS[rotaAtual].titulo;
