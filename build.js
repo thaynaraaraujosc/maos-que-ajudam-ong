@@ -72,12 +72,20 @@ async function build() {
   const relatorioCSS = await minificarArquivos('css', 'css');
   const relatorioJS = await minificarArquivos('js', 'js');
 
-  // HTML e imagens são copiados sem transformação (fora do escopo desta build simples)
+  // HTML é copiado sem transformação (fora do escopo desta build simples)
   copiarArquivo(path.join(RAIZ, 'html', 'index.html'), 'html/index.html');
-  copiarArquivo(
-    path.join(RAIZ, 'img', 'equipe-voluntarios.jpg'),
-    'img/equipe-voluntarios.jpg'
-  );
+
+  // Imagens já otimizadas manualmente (JPEG comprimido + variantes WebP/responsivas)
+  // são apenas copiadas — a otimização/conversão em si foi feita uma vez com Pillow
+  const IMAGENS = [
+    'equipe-voluntarios.jpg',
+    'equipe-voluntarios.webp',
+    'equipe-voluntarios-480w.jpg',
+    'equipe-voluntarios-480w.webp',
+  ];
+  IMAGENS.forEach((nome) => {
+    copiarArquivo(path.join(RAIZ, 'img', nome), path.join('img', nome));
+  });
 
   const todos = [...relatorioCSS, ...relatorioJS];
   const totalAntes = todos.reduce((s, r) => s + r.antes, 0);
