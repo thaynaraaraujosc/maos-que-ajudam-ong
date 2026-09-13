@@ -19,13 +19,21 @@ function renderHome() {
 
     <section class="sobre" aria-labelledby="sobre-titulo">
       <div class="container sobre-grid">
-        <img
-          src="../img/equipe-voluntarios.jpg"
-          alt="Grupo de voluntários da ONG Mãos que Ajudam sorrindo e se abraçando durante uma ação social ao ar livre"
-          width="480"
-          height="320"
-          loading="lazy"
-          class="sobre-imagem">
+        <picture>
+          <source
+            type="image/webp"
+            srcset="../img/equipe-voluntarios-480w.webp 480w, ../img/equipe-voluntarios.webp 960w"
+            sizes="(min-width: 700px) 480px, 100vw">
+          <img
+            src="../img/equipe-voluntarios.jpg"
+            srcset="../img/equipe-voluntarios-480w.jpg 480w, ../img/equipe-voluntarios.jpg 960w"
+            sizes="(min-width: 700px) 480px, 100vw"
+            alt="Grupo de voluntários da ONG Mãos que Ajudam sorrindo e se abraçando durante uma ação social ao ar livre"
+            width="480"
+            height="320"
+            loading="lazy"
+            class="sobre-imagem">
+        </picture>
 
         <div class="sobre-texto">
           <h2 id="sobre-titulo">Quem somos</h2>
