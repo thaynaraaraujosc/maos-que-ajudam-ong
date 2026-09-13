@@ -22,6 +22,7 @@
 
   /* Cores de apoio (feedback de formulário) */
   --color-danger: #d9534f;
+  --color-danger-dark: #a02622; /* uso em texto sobre fundo claro (contraste AA) */
   --color-success: #3fa34d;
   --color-success-dark: #1f6b32; /* uso em texto sobre fundo claro (contraste AA) */
 
@@ -47,6 +48,71 @@
   --container-max-width: 1100px;
   --grid-columns: 12;
   --grid-gap: var(--space-4);
+
+  /* Tokens de tema (light por padrão) — trocados no modo escuro */
+  --color-bg: var(--color-neutral-100);
+  --color-surface: var(--color-white);
+  --color-text: var(--color-neutral-700);
+  --color-text-muted: var(--color-neutral-500);
+  --color-border: var(--color-neutral-300);
+
+  /* Cores dos badges (variam no modo escuro para manter contraste) */
+  --badge-secondary-bg: rgba(244, 168, 37, 0.2);
+  --badge-secondary-text: var(--color-secondary-800);
+  --badge-primary-bg: rgba(47, 90, 168, 0.12);
+  --badge-primary-text: var(--color-primary-700);
+  --badge-success-bg: rgba(63, 163, 77, 0.15);
+  --badge-success-text: var(--color-success-dark);
+
+  /* Cores dos alertas (idem badges) */
+  --alerta-info-bg: rgba(47, 90, 168, 0.08);
+  --alerta-info-text: var(--color-primary-700);
+  --alerta-erro-bg: rgba(217, 83, 79, 0.08);
+  --alerta-erro-text: var(--color-danger-dark);
+}
+
+/* Modo escuro — segue a preferência do sistema (prefers-color-scheme) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #14181f;
+    --color-surface: #1e242c;
+    --color-text: #e8e8e8;
+    --color-text-muted: #a0a7b0;
+    --color-border: #33393f;
+
+    --badge-secondary-bg: #2b2416;
+    --badge-secondary-text: #f4c873;
+    --badge-primary-bg: #1a2233;
+    --badge-primary-text: #9fb8e8;
+    --badge-success-bg: #182b1d;
+    --badge-success-text: #8fd6a0;
+
+    --alerta-info-bg: #1a2233;
+    --alerta-info-text: #9fb8e8;
+    --alerta-erro-bg: #2b1616;
+    --alerta-erro-text: #e57373;
+  }
+}
+
+/* Modo escuro — ativado manualmente pelo botão de alternância (sobrepõe o sistema) */
+:root[data-theme="dark"] {
+  --color-bg: #14181f;
+  --color-surface: #1e242c;
+  --color-text: #e8e8e8;
+  --color-text-muted: #a0a7b0;
+  --color-border: #33393f;
+
+  --badge-secondary-bg: #2b2416;
+  --badge-secondary-text: #f4c873;
+  --badge-primary-bg: #1a2233;
+  --badge-primary-text: #9fb8e8;
+  --badge-success-bg: #182b1d;
+  --badge-success-text: #8fd6a0;
+
+  --alerta-info-bg: #1a2233;
+  --alerta-info-text: #9fb8e8;
+  --alerta-erro-bg: #2b1616;
+  --alerta-erro-text: #e57373;
 }
 
 /* Breakpoints do projeto (documentação de referência — 5 pontos de quebra):
@@ -65,9 +131,10 @@ body {
   margin: 0;
   font-family: var(--font-family-base);
   font-size: var(--font-size-sm);
-  color: var(--color-neutral-700);
+  color: var(--color-text);
   line-height: 1.6;
-  background-color: var(--color-neutral-100);
+  background-color: var(--color-bg);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 h1, h2, h3, h4 {
@@ -142,6 +209,33 @@ header {
   padding: var(--space-3) var(--space-4);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.botao-tema {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius);
+  color: var(--color-white);
+  font-size: var(--font-size-md);
+  line-height: 1;
+  padding: var(--space-1) var(--space-2);
+  cursor: pointer;
+}
+
+.botao-tema:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.botao-tema:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
+}
+
 header h1 {
   font-size: var(--font-size-md);
   margin: 0;
@@ -202,7 +296,7 @@ nav a[aria-current="page"] {
   top: 100%;
   left: 0;
   min-width: 220px;
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border-radius: var(--radius);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 20;
@@ -215,13 +309,13 @@ nav a[aria-current="page"] {
 
 .submenu li a {
   display: block;
-  color: var(--color-neutral-700);
+  color: var(--color-text);
   padding: var(--space-2) var(--space-3);
   text-decoration: none;
 }
 
 .submenu li a:hover {
-  background-color: var(--color-neutral-100);
+  background-color: var(--color-bg);
 }
 
 /* Breakpoint mobile (abaixo de 700px): esconde o menu e ativa o hambúrguer */
@@ -277,7 +371,7 @@ nav a[aria-current="page"] {
 
 /* Hero */
 .hero {
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   padding: var(--space-6) 0;
   text-align: center;
 }
@@ -353,7 +447,7 @@ section {
 }
 
 .sobre {
-  background-color: var(--color-neutral-100);
+  background-color: var(--color-bg);
 }
 
 /* Grid macro: imagem + texto, dentro do modelo de 12 colunas */
@@ -403,7 +497,7 @@ section {
   grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   padding: var(--space-4);
   border-radius: var(--radius);
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
@@ -446,13 +540,13 @@ section {
 
 /* CTA */
 .cta {
-  background-color: var(--color-neutral-100);
+  background-color: var(--color-bg);
   text-align: center;
 }
 
 /* Página de projetos */
 .pagina-intro {
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   text-align: center;
   padding-bottom: var(--space-4);
 }
@@ -466,7 +560,7 @@ section {
 
 .projeto {
   grid-column: 1 / -1;
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   padding: var(--space-4);
   border-radius: var(--radius);
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
@@ -493,11 +587,11 @@ section {
 }
 
 fieldset {
-  border: 1px solid var(--color-neutral-300);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius);
   padding: var(--space-4);
   margin-bottom: var(--space-4);
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
 }
 
 legend {
@@ -521,10 +615,12 @@ legend {
 
 .campo input {
   padding: var(--space-2);
-  border: 1px solid var(--color-neutral-300);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius);
   font-size: var(--font-size-sm);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Estado focus — realce ao entrar no campo */
@@ -636,18 +732,18 @@ address {
 }
 
 .badge-primary {
-  background-color: rgba(47, 90, 168, 0.12);
-  color: var(--color-primary-700);
+  background-color: var(--badge-primary-bg);
+  color: var(--badge-primary-text);
 }
 
 .badge-secondary {
-  background-color: rgba(244, 168, 37, 0.2);
-  color: var(--color-secondary-800);
+  background-color: var(--badge-secondary-bg);
+  color: var(--badge-secondary-text);
 }
 
 .badge-success {
-  background-color: rgba(63, 163, 77, 0.15);
-  color: var(--color-success-dark);
+  background-color: var(--badge-success-bg);
+  color: var(--badge-success-text);
 }
 
 /* Alertas — avisos contextuais não bloqueantes */
@@ -668,15 +764,15 @@ address {
 }
 
 .alerta-info {
-  background-color: rgba(47, 90, 168, 0.08);
+  background-color: var(--alerta-info-bg);
   border-color: var(--color-primary-500);
-  color: var(--color-primary-700);
+  color: var(--alerta-info-text);
 }
 
 .alerta-erro {
-  background-color: rgba(217, 83, 79, 0.08);
+  background-color: var(--alerta-erro-bg);
   border-color: var(--color-danger);
-  color: var(--color-danger);
+  color: var(--alerta-erro-text);
 }
 
 /* Toast — notificação não obstrutiva, some sozinha */
@@ -720,6 +816,8 @@ dialog.modal {
   width: 90%;
   position: relative;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background-color: var(--color-surface);
+  color: var(--color-text);
 }
 
 dialog.modal::backdrop {

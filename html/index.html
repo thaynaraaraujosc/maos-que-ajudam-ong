@@ -15,16 +15,25 @@
   <header>
     <div class="container header-content">
       <h1>Mãos que Ajudam</h1>
-      <button
-        type="button"
-        class="menu-toggle"
-        id="menu-toggle"
-        aria-controls="menu-principal"
-        aria-expanded="false"
-        aria-label="Abrir menu de navegação">
-        <span aria-hidden="true">&#9776;</span>
-      </button>
-      <nav aria-label="Navegação principal">
+      <div class="header-actions">
+        <button
+          type="button"
+          class="botao-tema"
+          id="alternar-tema"
+          aria-pressed="false"
+          aria-label="Ativar modo escuro">
+          <span aria-hidden="true" id="icone-tema">🌙</span>
+        </button>
+        <button
+          type="button"
+          class="menu-toggle"
+          id="menu-toggle"
+          aria-controls="menu-principal"
+          aria-expanded="false"
+          aria-label="Abrir menu de navegação">
+          <span aria-hidden="true">&#9776;</span>
+        </button>
+        <nav aria-label="Navegação principal">
         <ul id="menu-principal">
           <li><a href="#/inicio" data-rota="inicio">Início</a></li>
           <li class="tem-submenu">
@@ -37,7 +46,8 @@
           </li>
           <li><a href="#/cadastro" data-rota="cadastro">Cadastre-se</a></li>
         </ul>
-      </nav>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -89,6 +99,7 @@
   <script src="../js/modules/validacao.js"></script>
   <script src="../js/modules/ui.js"></script>
   <script src="../js/modules/nav.js"></script>
+  <script src="../js/modules/theme.js"></script>
   <script src="../js/modules/router.js"></script>
   <script src="../js/main.js"></script>
 </body>
