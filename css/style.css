@@ -457,9 +457,13 @@ section {
   gap: var(--grid-gap);
 }
 
-.sobre-grid > img,
+.sobre-grid > picture,
 .sobre-grid > .sobre-texto {
   grid-column: 1 / -1;
+}
+
+.sobre-grid > picture {
+  display: block;
 }
 
 .sobre-imagem {
@@ -475,7 +479,7 @@ section {
 
 /* Breakpoint 3: tablet retrato — grid parcial de 2 colunas */
 @media (min-width: 700px) {
-  .sobre-grid > img {
+  .sobre-grid > picture {
     grid-column: 1 / 6;   /* 5 de 12 colunas */
   }
 
