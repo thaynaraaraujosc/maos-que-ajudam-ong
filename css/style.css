@@ -109,6 +109,23 @@ h3, h4 { font-size: var(--font-size-md); }
   gap: var(--grid-gap);
 }
 
+/* Link "Pular para o conteúdo" (WCAG 2.1) — some visualmente, aparece ao focar via teclado */
+.link-pular {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 1000;
+  background-color: var(--color-primary-700);
+  color: var(--color-white);
+  padding: var(--space-2) var(--space-4);
+  border-radius: 0 0 var(--radius) 0;
+  transition: top 0.2s ease;
+}
+
+.link-pular:focus {
+  top: 0;
+}
+
 /* Header (Flexbox — alinhamento de componente interno) */
 header {
   background-color: var(--color-primary-500);
