@@ -1,0 +1,28 @@
+{
+  "name": "experiencia-pratica-1-ong",
+  "version": "1.0.0",
+  "description": "Plataforma web (Single Page Application) desenvolvida para uma ONG fictícia do terceiro setor, permitindo divulgar projetos sociais e captar voluntários/doadores através de um formulário de cadastro.",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thaynaraaraujosc/maos-que-ajudam-ong.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/thaynaraaraujosc/maos-que-ajudam-ong/issues"
+  },
+  "homepage": "https://github.com/thaynaraaraujosc/maos-que-ajudam-ong#readme",
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}

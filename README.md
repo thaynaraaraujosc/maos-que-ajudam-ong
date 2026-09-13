@@ -10,7 +10,7 @@ Repositório: https://github.com/thaynaraaraujosc/maos-que-ajudam-ong
 
 - Navegador atualizado (Chrome, Firefox, Edge ou Safari)
 - Python 3 instalado (usado apenas para servir os arquivos localmente via `http.server`)
-- Não há dependências de Node/NPM — o projeto usa apenas HTML, CSS e JavaScript puro, sem processo de build
+- Node.js 18+ e npm (apenas para gerar a build de produção minificada — não é necessário para rodar o projeto em desenvolvimento)
 
 ## Tecnologias
 
@@ -52,6 +52,22 @@ python3 -m http.server 8000
 ```
 
 Depois acesse `http://localhost:8000/html/index.html` no navegador.
+
+## Build de produção
+
+O projeto usa [esbuild](https://esbuild.github.io/) para gerar uma versão minificada de CSS e JavaScript em `dist/`, mantendo a mesma estrutura de pastas (para os caminhos relativos do HTML continuarem funcionando sem alteração).
+
+```bash
+npm install
+npm run build
+```
+
+Isso gera a pasta `dist/` com `html/`, `css/`, `js/` e `img/` prontos para publicação, com uma redução de aproximadamente 27% no tamanho total dos arquivos de CSS/JS. Para servir a build de produção localmente:
+
+```bash
+cd dist
+python3 -m http.server 8000
+```
 
 ## Rotas da aplicação
 
